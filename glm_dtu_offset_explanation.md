@@ -92,11 +92,7 @@ $$
 For transcript T1 in control:
 
 $$
-\text{usage}_{T1,\ control}
-=
-\frac{80}{100}
-=
-0.8
+\text{usage}_{T1,\ control} = \frac{80}{100} = 0.8
 $$
 
 So T1 is 80% of the gene's expression in control.
@@ -104,11 +100,7 @@ So T1 is 80% of the gene's expression in control.
 For transcript T1 in case:
 
 $$
-\text{usage}_{T1,\ case}
-=
-\frac{80}{200}
-=
-0.4
+\text{usage}_{T1,\ case} = \frac{80}{200} = 0.4
 $$
 
 So T1 is only 40% of the gene's expression in case.
@@ -116,19 +108,11 @@ So T1 is only 40% of the gene's expression in case.
 For T2:
 
 $$
-\text{usage}_{T2,\ control}
-=
-\frac{20}{100}
-=
-0.2
+\text{usage}_{T2,\ control} = \frac{20}{100} = 0.2
 $$
 
 $$
-\text{usage}_{T2,\ case}
-=
-\frac{120}{200}
-=
-0.6
+\text{usage}_{T2,\ case} = \frac{120}{200} = 0.6
 $$
 
 So the gene shifts from mostly T1 to mostly T2.
@@ -924,11 +908,7 @@ So raw T2 expression increased 6-fold.
 But the GLM decomposes that into two parts:
 
 $$
-\text{raw transcript change}
-=
-\text{gene expression change}
-\times
-\text{usage change}
+\text{raw transcript change} = \text{gene expression change} \times \text{usage change}
 $$
 
 Gene expression changed from 100 to 200:
