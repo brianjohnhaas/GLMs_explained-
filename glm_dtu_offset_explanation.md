@@ -1444,3 +1444,41 @@ $$
 That second form makes the meaning clear:
 
 > the GLM is modeling transcript usage, not raw transcript abundance.
+
+---
+
+## 21. A more principled alternative: the DEXSeq paired-count model
+
+The offset approach treats $G_i$ as a fixed, known quantity. It enters the model as a
+constant with a coefficient forced to 1, so any uncertainty in the total gene count is
+ignored.
+
+DEXSeq (Anders, Reyes & Huber, 2012) takes a more principled approach. Instead of
+using $G_i$ as an offset, it constructs **two NB observations per feature per sample**:
+
+| observation | count | meaning |
+|---|---|---|
+| feature | $Y_{f,i}$ | reads on the focal feature in sample $i$ |
+| other | $Y_{\text{other},i} = G_i - Y_{f,i}$ | reads on all other features of the gene in sample $i$ |
+
+Both counts are modeled jointly under the NB distribution with a shared dispersion
+parameter. The linear predictor includes sample-level effects, feature-level effects,
+and a **condition $\times$ feature interaction term** — which is the quantity being
+tested for differential usage.
+
+This paired formulation has several advantages over the offset approach:
+
+1. **Uncertainty in $G_i$ is propagated.** Because both $Y_{f,i}$ and
+   $Y_{\text{other},i}$ are treated as random NB variables, the model does not assume
+   the gene total is observed without error.
+
+2. **More data are used.** The "other" counts actively inform the dispersion estimate,
+   which can improve power, particularly for genes with many features.
+
+3. **Overdispersion in the remainder is modelled.** The NB variance–mean relationship
+   applies to both sides; the offset approach has no comparable term for the
+   non-feature counts.
+
+In practice, the two approaches give similar results when counts are moderate to high,
+because $G_i$ is then estimated reliably enough that treating it as fixed is a good
+approximation. At low counts the paired model is the more robust choice.
